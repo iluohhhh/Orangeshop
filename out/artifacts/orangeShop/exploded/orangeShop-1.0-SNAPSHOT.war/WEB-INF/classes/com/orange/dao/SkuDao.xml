@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orange.dao.product.SkuDao">
+    <resultMap id="BaseResultMap" type="com.orange.bean.product.Sku">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="color_id" property="colorId" jdbcType="INTEGER"/>
+        <result column="size" property="size" jdbcType="VARCHAR"/>
+        <result column="delive_fee" property="deliveFee" jdbcType="DOUBLE"/>
+        <result column="sku_price" property="skuPrice" jdbcType="DOUBLE"/>
+        <result column="stock_inventory" property="stockInventory" jdbcType="INTEGER"/>
+        <result column="sku_upper_limit" property="skuUpperLimit" jdbcType="INTEGER"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="sku_img" property="skuImg" jdbcType="VARCHAR"/>
+        <result column="sku_sort" property="skuSort" jdbcType="INTEGER"/>
+        <result column="sku_name" property="skuName" jdbcType="VARCHAR"/>
+        <result column="market_price" property="marketPrice" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="last_status" property="lastStatus" jdbcType="INTEGER"/>
+        <result column="sku_type" property="skuType" jdbcType="INTEGER"/>
+        <result column="sales" property="sales" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="selectFields">
+        SELECT
+            id,product_id,color_id,size,delive_fee,sku_price,stock_inventory,sku_upper_limit,location,sku_img
+            sku_sort,sku_name,market_price,create_time,update_time,create_user_id,update_user_id,last_status,sku_type,sales
+        FROM t_sku
+    </sql>
+    <sql id="conditions">
+        <where>
+            <if test="skuName != null and skuName != ''">
+                    sku_name=#{skuName}
+            </if>
+        </where>
+    </sql>
+    <sql id="limited">
+        <if test="startRow != null">
+            limit ${startRow},${pageSize}
+        </if>
+    </sql>
+    <select id="getEntityList" parameterType="com.orange.bean.product.Sku" resultMap="BaseResultMap">
+        <include refid="selectFields"/>
+        <include refid="conditions"/>
+        <include refid="limited"/>
+    </select>
+    <insert id="addSku" parameterType="com.orange.bean.product.Sku">
+        INSERT INTO t_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="colorId != null">
+                color_id,
+            </if>
+            <if test="size != null">
+                size,
+            </if>
+            <if test="deliveFee != null">
+                delive_fee,
+            </if>
+            <if test="skuPrice != null">
+                sku_price,
+            </if>
+            <if test="stockInventory != null">
+                stock_inventory,
+            </if>
+            <if test="skuUpperLimit != null">
+                sku_upper_limit,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="skuImg != null">
+                sku_img,
+            </if>
+            <if test="skuSort != null">
+                sku_sort,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="lastStatus != null">
+                last_status,
+            </if>
+            <if test="skuType != null">
+                sku_type,
+            </if>
+            <if test="sales != null">
+                sales
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="productId != null">
+                #{productId},
+            </if>
+            <if test="colorId != null">
+                #{colorId},
+            </if>
+            <if test="size != null">
+                #{size},
+            </if>
+            <if test="deliveFee != null">
+                #{deliveFee},
+            </if>
+            <if test="skuPrice != null">
+                #{skuPrice},
+            </if>
+            <if test="stockInventory != null">
+                #{stockInventory},
+            </if>
+            <if test="skuUpperLimit != null">
+                #{skuUpperLimit},
+            </if>
+            <if test="location != null">
+                #{location},
+            </if>
+            <if test="skuImg != null">
+                #{skuImg},
+            </if>
+            <if test="skuSort != null">
+                #{skuSort},
+            </if>
+            <if test="skuName != null">
+                #{skuName},
+            </if>
+            <if test="marketPrice != null">
+                #{marketPrice},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId},
+            </if>
+            <if test="lastStatus != null">
+                #{lastStatus},
+            </if>
+            <if test="skuType != null">
+                #{skuType},
+            </if>
+            <if test="sales != null">
+                #{sales}
+            </if>
+        </trim>
+    </insert>
+</mapper>

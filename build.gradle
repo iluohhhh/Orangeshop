@@ -1,0 +1,49 @@
+group 'jimboLix'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+//apply plugin: 'jetty'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.4.RELEASE'
+    compile group: 'net.fckeditor', name: 'java-core', version: '2.6'
+    compile group: 'c3p0',name: 'c3p0',version: '0.9.1.2'
+    compile group: 'org.springframework',name: 'spring-web',version: '4.3.4.RELEASE'
+    compile group:'org.springframework',name: 'spring-webmvc',version: '4.3.4.RELEASE'
+    compile group: 'org.springframework',name: 'spring-jdbc',version: '4.3.4.RELEASE'
+    compile group: 'org.springframework',name: 'spring-orm' ,version: '4.3.4.RELEASE'
+    compile group: 'org.springframework',name: 'spring-expression' ,version: '4.3.4.RELEASE'
+    compile group: 'org.springframework',name: 'spring-aspects' ,version: '4.3.4.RELEASE'
+    compile group: 'org.springframework',name: 'spring-test' ,version: '4.3.4.RELEASE'
+    compile group: 'org.springframework',name: 'spring-context-support' ,version: '4.3.4.RELEASE'
+    compile group: 'org.mybatis',name:'mybatis',version: '3.2.7'
+    compile group: 'org.mybatis',name:'mybatis-spring',version: '1.2.2'
+//    compile group: 'org.apache.commons',name: 'commons-lang3',version: '3.1'
+    compile group: 'mysql',name: 'mysql-connector-java',version: '5.1.8'
+    compile group: 'javax.servlet',name: 'jstl',version: '1.2'
+    compile group: 'org.slf4j',name: 'slf4j-log4j12',version: '1.6.6'
+    compile group: 'log4j',name: 'log4j',version: '1.2.17'
+    compile group:'org.codehaus.jackson', name:'jackson-mapper-asl',version: '1.9.11'
+    compile group:'com.alibaba',name: 'fastjson',version: '1.2.24'
+    compile group: 'javax.servlet',name: 'servlet-api',version: '2.2'
+}
+
+
+gretty {
+    port = 8088
+    contextPath ="/${project.name}"
+    servletContainer = 'tomcat8'
+    debugPort = 5005      // default
+ 	debugSuspend = true   // default
+ 	httpsEnabled = true
+}

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.dao.product.ProductDao">
+    <resultMap id="BaseResultMap" type="com.orange.bean.product.Product">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="no" property="no" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="weight" property="weight" jdbcType="DOUBLE"/>
+        <result column="is_new" property="isNew" jdbcType="BIT"/>
+        <result column="is_hot" property="isHot" jdbcType="BIT"/>
+        <result column="is_commend" property="isCommend" jdbcType="BIT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="check_time" property="checkTime" jdbcType="TIMESTAMP"/>
+        <result column="check_user_id" property="checkUserId" jdbcType="VARCHAR"/>
+        <result column="is_show" property="isShow" jdbcType="BIT"/>
+        <result column="is_del" property="isDel" jdbcType="BIT"/>
+        <result column="type_id" property="typeId" jdbcType="INTEGER"/>
+        <result column="brand_id" property="brandId" jdbcType="INTEGER"/>
+        <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
+        <result column="sales" property="sales" jdbcType="INTEGER"/>
+        <result column="feature" property="feature" jdbcType="VARCHAR"/>
+        <result column="color" property="color" jdbcType="VARCHAR"/>
+        <result column="size" property="size" jdbcType="VARCHAR"/>
+        <result property="description" column="description"/>
+        <result property="packageList" column="package_list"/>
+    </resultMap>
+
+    <sql id="selectFields">
+        SELECT
+            id,no,name,weight,is_new,is_hot,is_commend,create_time,create_user_id,check_time,check_user_id,
+            is_show,is_del,type_id,brand_id,keywords,sales,feature,color,size
+        from t_product
+    </sql>
+
+    <sql id="condition">
+        <where>
+            <if test="id != null and id !=''">
+                id=#{id}
+            </if>
+            <if test="isHot != null">
+                AND is_hot=#{isHot}
+            </if>
+            <if test="no != null and no !=''">
+                AND no=#{no}
+            </if>
+            <if test="name != null and name != ''">
+                AND name like '%${name}%'
+            </if>
+            <if test="brandId != null">
+                and brand_id=#{brandId}
+            </if>
+            <if test="isShow != null">
+                and is_show=#{isShow}
+            </if>
+        </where>
+    </sql>
+    <sql id="limited">
+        <if test="startRow != null">
+            limit ${startRow}, ${pageSize}
+        </if>
+    </sql>
+
+    <select id="getProductListWithPage" parameterType="com.orange.bean.vo.ProductVo" resultMap="BaseResultMap">
+        <include refid="selectFields"/>
+        <include refid="condition"/>
+        <include refid="limited"/>
+    </select>
+
+    <select id="getProductListCount" parameterType="com.orange.bean.vo.ProductVo" resultType="int">
+        SELECT count(1) from t_product
+        <include refid="condition"/>
+    </select>
+
+    <!-- 添加 -->
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="no != null">
+                no,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="isNew != null">
+                is_new,
+            </if>
+            <if test="isHot != null">
+                is_hot,
+            </if>
+            <if test="isCommend != null">
+                is_commend,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+            <if test="checkUserId != null">
+                check_user_id,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="sales != null">
+                sales,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="packageList != null">
+                package_list,
+            </if>
+            <if test="feature != null">
+                feature,
+            </if>
+            <if test="color != null">
+                color,
+            </if>
+            <if test="size != null">
+                size,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="no != null">
+                #{no},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="weight != null">
+                #{weight},
+            </if>
+            <if test="isNew != null">
+                #{isNew},
+            </if>
+            <if test="isHot != null">
+                #{isHot},
+            </if>
+            <if test="isCommend != null">
+                #{isCommend},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime},
+            </if>
+            <if test="checkUserId != null">
+                #{checkUserId},
+            </if>
+            <if test="isShow != null">
+                #{isShow},
+            </if>
+            <if test="isDel != null">
+                #{isDel},
+            </if>
+            <if test="typeId != null">
+                #{typeId},
+            </if>
+            <if test="brandId != null">
+                #{brandId},
+            </if>
+            <if test="keywords != null">
+                #{keywords},
+            </if>
+            <if test="sales != null">
+                #{sales},
+            </if>
+            <if test="description != null">
+                #{description},
+            </if>
+            <if test="packageList != null">
+                #{packageList},
+            </if>
+            <if test="feature != null">
+                #{feature},
+            </if>
+            <if test="color != null">
+                #{color},
+            </if>
+            <if test="size != null">
+                #{size},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.orange.bean.product.Product">
+        update t_product
+        <set>
+            <trim suffixOverrides=",">
+                <if test="name != null and name !=''">
+                    name = #{name},
+                </if>
+                <if test="isHot !=null and isHot !=''">
+                    is_hot=#{isHot},
+                </if>
+                <if test="isNew != null and isNew !=''">
+                    is_new=#{isNew},
+                </if>
+                <if test="weight != null and weight !=''">
+                    weight=#{weight}
+                </if>
+            </trim>
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+
+    <update id="isShow" parameterType="com.orange.bean.product.Product">
+        UPDATE t_product
+        <if test="isShow != null and isShow !=' '">
+            SET is_show=#{isShow}
+        </if>
+        <where>
+            <if test="id != null and id !=' '">
+                id =#{id}
+            </if>
+        </where>
+    </update>
+
+    <!--根据主键查询-->
+    <select id="getProductByKey" parameterType="Integer" resultMap="BaseResultMap">
+        select * from t_product
+             where   id=#{id}
+    </select>
+
+    <select id="getProduct" parameterType="com.orange.bean.product.Product" resultMap="BaseResultMap">
+        <include refid="selectFields"/>
+        <include refid="condition"/>
+    </select>
+</mapper>

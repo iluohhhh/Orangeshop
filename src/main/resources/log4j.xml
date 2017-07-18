@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false" threshold="null">
+  <!-- <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <param name="target" value="System.err"/>
+    <param name="threshold" value="DEBUG"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="conversionPattern" value="[%d][%-5p][%c:%L] - %m%n"/>
+    </layout>
+  </appender>
+   -->
+  <appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="/var/log/simp_fort/system/SystemError" />
+    <param name="DatePattern" value="yyyyMMdd"></param>
+     <param name="ImmediateFlush" value="true"/>
+    <param name="Append" value="true" />
+    <param name="maxFileSize" value="100MB" />
+     <param name="MaxBackupIndex" value="50" />    
+     <layout class="org.apache.log4j.PatternLayout">
+     <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n" />
+   </layout>
+  <filter class="org.apache.log4j.varia.LevelRangeFilter">
+   <param name="LevelMax" value="ERROR" />
+   <param name="LevelMin" value="ERROR" />
+  </filter>
+ </appender>
+ 
+ <appender name="All" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="/var/log/simp_fort/system/SystemOut" />
+    <param name="DatePattern" value="yyyyMMdd"></param>
+     <param name="ImmediateFlush" value="true"/>
+       <param name="Append" value="true" />
+       <param name="MaxFileSize" value="100MB" />
+        <param name="MaxBackupIndex" value="50" />  
+     <layout class="org.apache.log4j.PatternLayout">
+     <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n" />
+   </layout>
+  <filter class="org.apache.log4j.varia.LevelRangeFilter">
+   <param name="LevelMax" value="ERROR" />
+   <param name="LevelMin" value="INFO" />
+  </filter>
+ </appender>
+ 
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+     <param name="target" value="System.err"/>
+     <param name="threshold" value="DEBUG"/>
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="conversionPattern" value="[%d][%-5p][%c:%L] - %m%n"/>
+    </layout>
+  </appender>
+  <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+      <param name="fileName" value="D:\\log4j.log"></param>
+      <param name="Append " value="true"/>
+  </appender>
+  <logger name="com.mchange" additivity="true">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.quartz" additivity="true">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache" additivity="true">
+    <level value="INFO"/>
+  </logger>
+  <logger name="org.directwebremoting" additivity="true">
+    <level value="INFO"/>
+  </logger>
+  <logger name="org.springframework" additivity="true">
+    <level value="INFO"/>
+  </logger>
+  
+  <root>
+     <level value="All"/>
+    <!--  <appender-ref ref="ERROR"/>
+     <appender-ref ref="All"/> -->
+      <appender-ref ref="CONSOLE"/>
+  </root>
+   
+
+</log4j:configuration>

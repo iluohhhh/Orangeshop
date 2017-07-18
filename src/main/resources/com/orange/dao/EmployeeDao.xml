@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orange.dao.EmployeeDao">
+	<resultMap id="employee" type="com.orange.bean.user.Employee">
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="degree" column="degree" />
+		<result property="email" column="email" />
+		<result property="gender" column="gender" />
+		<result property="imgUrl" column="img_url" />
+		<result property="phone" column="phone" />
+		<result property="realName" column="real_name" />
+		<result property="school" column="school" />
+		<result property="isDel" column="is_del" />
+	</resultMap>
+	<!-- Select SQL -->
+	<sql id="employeeSelector">
+		SELECT
+			<if test="fields != null">
+				${fields}
+			</if>
+			<if test="fields == null">
+			username,password,degree,email,gender,img_url,phone,real_name,school,is_del
+			</if>
+		FROM bbs_employee
+	</sql>
+	<sql id="employeeListWhere">
+		<where>
+				<if test="username != null">
+					and  username =#{username}
+				</if>
+				<if test="password != null">
+					and  password =#{password}
+				</if>
+				<if test="degree != null">
+					and  degree like "%"#{degree}"%"
+				</if>
+				<if test="email != null">
+					and  email like "%"#{email}"%"
+				</if>
+				<if test="gender != null">
+					and gender=#{gender}
+				</if>
+				<if test="imgUrl != null">
+					and  img_url like "%"#{imgUrl}"%"
+				</if>
+				<if test="phone != null">
+					and  phone like "%"#{phone}"%"
+				</if>
+				<if test="realName != null">
+					and  real_name like "%"#{realName}"%"
+				</if>
+				<if test="school != null">
+					and  school like "%"#{school}"%"
+				</if>
+				<if test="isDel != null">
+					and is_del=#{isDel}
+				</if>
+		</where>
+	</sql>
+
+	<sql id="employeeListOrder">
+		<if test="orderFields != null and orderFields.size >0">
+		order by
+			<foreach collection="orderFields" separator="," item="orderField">
+				${orderField.fieldName} ${orderField.order}
+			</foreach>
+		</if>
+	</sql>
+
+	<sql id="employeeListLimit">
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</sql>
+
+	<select id="getEmployee" resultMap="employee" parameterType="com.orange.bean.user.Employee">
+		SELECT username,password,degree,email,gender,img_url,phone,real_name,school,is_del FROM t_employee
+		<include refid="employeeListWhere"/>
+	</select>
+	<select id="getEmployeesByKeys" resultMap="employee" parameterType="ArrayList">
+		SELECT username,password,degree,email,gender,img_url,phone,real_name,school,is_del FROM t_employee
+		WHERE
+		username in
+		<foreach collection="list" separator="," item="id" open="(" close=")">
+			#{id}
+		</foreach>
+	</select>
+
+
+	<!-- 根据主键批量删除 -->
+	<delete id="deleteByKeys">
+		DELETE FROM t_employee
+		WHERE
+		username in
+		<foreach collection="list" separator="," item="id" open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="addEmployee" parameterType="Employee">
+		INSERT INTO t_employee
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="username != null">
+					username,
+				</if>
+				<if test="password != null">
+					password,
+				</if>
+				<if test="degree != null">
+					degree,
+				</if>
+				<if test="email != null">
+					email,
+				</if>
+				<if test="gender != null">
+					gender,
+				</if>
+				<if test="imgUrl != null">
+					img_url,
+				</if>
+				<if test="phone != null">
+					phone,
+				</if>
+				<if test="realName != null">
+					real_name,
+				</if>
+				<if test="school != null">
+					school,
+				</if>
+					<if test="isDel != null">
+						is_del
+					</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="username != null">
+						#{username},
+					</if>
+					<if test="password != null">
+						#{password},
+					</if>
+					<if test="degree != null">
+						#{degree},
+					</if>
+					<if test="email != null">
+						#{email},
+					</if>
+					<if test="gender != null">
+						#{gender},
+					</if>
+					<if test="imgUrl != null">
+						#{imgUrl},
+					</if>
+					<if test="phone != null">
+						#{phone},
+					</if>
+					<if test="realName != null">
+						#{realName},
+					</if>
+					<if test="school != null">
+						#{school},
+					</if>
+					<if test="isDel != null">
+						#{isDel}
+					</if>
+		</trim>
+	</insert>
+</mapper>

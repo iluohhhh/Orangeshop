@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="com.orange.dao.product.ClassiFyDao">
+        <resultMap id="baseMap" type="com.orange.bean.product.ClassiFy">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="parentId" property="parent_id"/>
+        </resultMap>
+    <insert id="save" parameterType="com.orange.bean.product.ClassiFy">
+        INSERT INTO t_classify(name,parent_id) VALUES (#{name},#{parentId})
+    </insert>
+
+    <select id="getClassByPage" parameterType="com.orange.bean.product.ClassiFy" resultMap="baseMap">
+        select * from t_classify
+         limit ${startRow}, ${pageSize}
+    </select>
+
+    <select id="getCount" parameterType="com.orange.bean.product.ClassiFy" resultType="int">
+        select count(1) from t_classify
+    </select>
+</mapper>

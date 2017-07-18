@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orange.dao.DetailDao">
+	<resultMap id="detail" type="com.orange.bean.order.Detail">
+		<result property="id" column="id" />
+		<result property="orderId" column="order_id" />
+		<result property="productNo" column="product_no" />
+		<result property="productName" column="product_name" />
+		<result property="color" column="color" />
+		<result property="size" column="size" />
+		<result property="skuPrice" column="sku_price" />
+		<result property="amount" column="amount" />
+	</resultMap>
+	<!-- Select SQL -->
+	<sql id="detailSelector">
+		SELECT
+			id,order_id,product_no,product_name,color,size,sku_price,amount
+		FROM t_detail
+	</sql>
+	<sql id="detailListWhere">
+		<where>
+				<if test="id != null">
+					and id=#{id}
+				</if>
+				<if test="orderId != null">
+					and order_id=#{orderId}
+				</if>
+				<if test="productNo != null">
+					and product_no=#{productNo}
+				</if>
+				<if test="productName != null">
+					and product_name=#{productName}
+				</if>
+				<if test="color != null">
+					and color=#{color}
+				</if>
+				<if test="size != null">
+					and size=#{size}
+				</if>
+				<if test="skuPrice != null">
+					and sku_price=#{skuPrice}
+				</if>
+				<if test="amount != null">
+					and amount=#{amount}
+				</if>
+		</where>
+	</sql>
+
+	<sql id="detailListLimit">
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</sql>
+
+	<!-- 根据主键查询 -->
+	<select id="getDetailByKey" resultMap="detail" parameterType="hashMap">
+		SELECT id,order_id,product_no,product_name,color,size,sku_price,amount FROM t_detail
+		WHERE
+		id=#{id}
+	</select>
+	<select id="getDetailsByKeys" resultMap="detail" parameterType="ArrayList">
+		SELECT id,order_id,product_no,product_name,color,size,sku_price,amount FROM t_detail
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="(" close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 根据主键批量删除 -->
+	<delete id="deleteByKeys">
+		DELETE FROM t_detail
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据主键更新 -->
+	<update id="updateDetailByKey" parameterType="com.orange.bean.order.Detail">
+		UPDATE bbs_detail
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">
+					id = #{id},
+				</if>
+				<if test="orderId != null">
+					order_id = #{orderId},
+				</if>
+				<if test="productNo != null">
+					product_no = #{productNo},
+				</if>
+				<if test="productName != null">
+					product_name = #{productName},
+				</if>
+				<if test="color != null">
+					color = #{color},
+				</if>
+				<if test="size != null">
+					size = #{size},
+				</if>
+				<if test="skuPrice != null">
+					sku_price = #{skuPrice},
+				</if>
+				<if test="amount != null">
+					amount = #{amount}
+				</if>
+			</trim>
+		</set>
+		WHERE
+		id=#{id}
+	</update>
+	<!-- 数据集合 -->
+	<select id="getDetailList" parameterType="com.orange.bean.order.Detail" resultMap="detail">
+		<include refid="detailSelector" />
+		<include refid="detailListWhere" />
+	</select>
+	<!-- 添加 -->
+	<insert id="addDetail" parameterType="Detail">
+		INSERT INTO t_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="orderId != null">
+					order_id,
+				</if>
+				<if test="productNo != null">
+					product_no,
+				</if>
+				<if test="productName != null">
+					product_name,
+				</if>
+				<if test="color != null">
+					color,
+				</if>
+				<if test="size != null">
+					size,
+				</if>
+				<if test="skuPrice != null">
+					sku_price,
+				</if>
+					<if test="amount != null">
+						amount
+					</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null">
+						#{id},
+					</if>
+					<if test="orderId != null">
+						#{orderId},
+					</if>
+					<if test="productNo != null">
+						#{productNo},
+					</if>
+					<if test="productName != null">
+						#{productName},
+					</if>
+					<if test="color != null">
+						#{color},
+					</if>
+					<if test="size != null">
+						#{size},
+					</if>
+					<if test="skuPrice != null">
+						#{skuPrice},
+					</if>
+					<if test="amount != null">
+						#{amount}
+					</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orange.dao.AddrDao">
+	<resultMap id="addr" type="com.orange.bean.user.Addr">
+		<result property="id" column="id" />
+		<result property="buyerId" column="buyer_id" />
+		<result property="name" column="name" />
+		<result property="city" column="city" />
+		<result property="addr" column="addr" />
+		<result property="phone" column="phone" />
+		<result property="isDef" column="is_def" />
+	</resultMap>
+	<!-- Select SQL -->
+	<sql id="addrSelector">
+		SELECT
+			id,buyer_id,name,city,addr,phone,is_def
+		FROM t_addr
+	</sql>
+	<sql id="addrListWhere">
+		<where>
+				<if test="id != null">
+					and id=#{id}
+				</if>
+				<if test="buyerId != null">
+					and buyer_id=#{buyerId}
+				</if>
+				<if test="name != null">
+					and name=#{name}
+				</if>
+				<if test="city != null">
+					and city=#{city}
+				</if>
+				<if test="addr != null">
+					and addr=#{addr}
+				</if>
+				<if test="phone != null">
+					and phone=#{phone}
+				</if>
+				<if test="isDef != null">
+					and is_def=#{isDef}
+				</if>
+		</where>
+	</sql>
+
+	<sql id="addrListOrder">
+		<if test="orderFields != null and orderFields.size >0">
+		order by 
+			<foreach collection="orderFields" separator="," item="orderField">
+				${orderField.fieldName} ${orderField.order}
+			</foreach>
+		</if>
+	</sql>
+
+	<sql id="addrListLimit">
+		<if test="startRow != null">
+			limit #{startRow},#{pageSize}
+		</if>
+	</sql>
+
+	<!-- 根据主键查询 -->
+	<select id="getAddrByKey" resultMap="addr" parameterType="hashMap">
+		SELECT id,buyer_id,name,city,addr,phone,is_def FROM t_addr
+		WHERE
+		id=#{id}
+	</select>
+	<select id="getAddrsByKeys" resultMap="addr" parameterType="ArrayList">
+		SELECT id,buyer_id,name,city,addr,phone,is_def FROM t_addr
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="(" close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 根据主键删除 -->
+	<delete id="deleteByKey" parameterType="hashMap">
+		DELETE FROM t_addr
+		WHERE
+		id=#{id}
+	</delete>
+
+	<!-- 根据主键批量删除 -->
+	<delete id="deleteByKeys">
+		DELETE FROM t_addr
+		WHERE
+		id in
+		<foreach collection="list" separator="," item="id" open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据主键更新 -->
+	<update id="updateAddrByKey" parameterType="com.orange.bean.user.Addr">
+		UPDATE bbs_addr
+		<set>
+			<trim suffixOverrides=",">
+				<if test="id != null">
+					id = #{id},
+				</if>
+				<if test="buyerId != null">
+					buyer_id = #{buyerId},
+				</if>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="city != null">
+					city = #{city},
+				</if>
+				<if test="addr != null">
+					addr = #{addr},
+				</if>
+				<if test="phone != null">
+					phone = #{phone},
+				</if>
+				<if test="isDef != null">
+					is_def = #{isDef}
+				</if>
+			</trim>
+		</set>
+		WHERE
+		id=#{id}
+	</update>
+	<!-- 分页 -->
+	<select id="getAddrListWithPage" parameterType="com.orange.bean.user.Addr" resultMap="addr">
+		<include refid="addrSelector" />
+		<include refid="addrListWhere" />
+		<include refid="addrListLimit" />
+	</select>
+	<!-- 数据总数 -->
+	<select id="getAddrListCount" parameterType="com.orange.bean.user.Addr" resultType="int">
+		SELECT count(1) FROM t_addr
+		<include refid="addrListWhere" />
+	</select>
+	<!-- 数据集合 -->
+	<select id="getAddrList" parameterType="com.orange.bean.user.Addr" resultMap="addr">
+		<include refid="addrSelector" />
+		<include refid="addrListWhere" />
+	</select>
+	<!-- 添加 -->
+	<insert id="addAddr" parameterType="Addr">
+		INSERT INTO t_addr
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="buyerId != null">
+					buyer_id,
+				</if>
+				<if test="name != null">
+					name,
+				</if>
+				<if test="city != null">
+					city,
+				</if>
+				<if test="addr != null">
+					addr,
+				</if>
+				<if test="phone != null">
+					phone,
+				</if>
+					<if test="isDef != null">
+						is_def
+					</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+					<if test="id != null">
+						#{id},
+					</if>
+					<if test="buyerId != null">
+						#{buyerId},
+					</if>
+					<if test="name != null">
+						#{name},
+					</if>
+					<if test="city != null">
+						#{city},
+					</if>
+					<if test="addr != null">
+						#{addr},
+					</if>
+					<if test="phone != null">
+						#{phone},
+					</if>
+					<if test="isDef != null">
+						#{isDef}
+					</if>
+		</trim>
+	</insert>
+</mapper>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: org.devlib.schmidt:imageinfo:1.9">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/devlib/schmidt/imageinfo/1.9/imageinfo-1.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

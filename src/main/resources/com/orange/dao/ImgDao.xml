@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orange.dao.product.ImgDao">
+    <resultMap id="BaseResultMap" type="com.orange.bean.product.Img">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="is_def" property="isDef" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="selectFields">
+           SELECT id,url,is_def,product_id
+        form t_img
+    </sql>
+    <sql id="conditions">
+        <where>
+            <if test="productId != null and productId !=' '">
+                product_id=#{productId}
+            </if>
+        </where>
+    </sql>
+    <select id="getImgListWithPage" parameterType="com.orange.bean.product.Img" resultMap="BaseResultMap">
+        <include refid="selectFields"/>
+        <include refid="conditions"/>
+    </select>
+    <insert id="addImg" parameterType="com.orange.bean.product.Img">
+        INSERT INTO t_img
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="isDef != null">
+                is_def
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="productId != null">
+                #{productId},
+            </if>
+            <if test="url != null">
+                #{url},
+            </if>
+            <if test="isDef != null">
+                #{isDef}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getImgByProductId" parameterType="int" resultMap="BaseResultMap">
+        SELECT * from t_img where product_id=#{productId}
+    </select>
+</mapper>

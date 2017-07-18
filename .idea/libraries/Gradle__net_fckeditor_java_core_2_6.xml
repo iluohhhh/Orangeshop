@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: net.fckeditor:java-core:2.6">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/fckeditor/java-core/2.6/java-core-2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
