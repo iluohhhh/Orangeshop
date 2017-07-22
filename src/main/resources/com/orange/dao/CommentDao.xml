@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.dao.CommentDao">
+    <insert id="save" parameterType="com.orange.bean.order.Comment">
+        insert into comment
+        <trim suffixOverrides="," prefix="(" suffix=")">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="oid != null">
+                oid,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="contrnt != null and contrnt !=''">
+                contrnt,
+            </if>
+            <if test="imgUrl !=null and imgUrl !=''">
+                imgUrl,
+            </if>
+            <if test="buyer != null and buyer !=''">
+                buyer
+            </if>
+        </trim>
+        values
+        <trim suffixOverrides="," prefix="(" suffix=")">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="oid != null">
+                #{oid},
+            </if>
+            <if test="pid != null">
+                #{pid},
+            </if>
+            <if test="contrnt != null and contrnt !=''">
+                #{contrnt},
+            </if>
+            <if test="imgUrl !=null and imgUrl !=''">
+                #{imgUrl},
+            </if>
+            <if test="buyer != null and buyer !=''">
+                #{buyer}
+            </if>
+        </trim>
+    </insert>
+    <select id="getComments" parameterType="com.orange.bean.order.Comment" resultType="com.orange.bean.order.Comment">
+        select * from comment
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+            <if test="oid != null">
+                and oid=#{oid}
+            </if>
+            <if test="pid != null">
+                and pid=#{pid}
+            </if>
+        </where>
+    </select>
+
+</mapper>

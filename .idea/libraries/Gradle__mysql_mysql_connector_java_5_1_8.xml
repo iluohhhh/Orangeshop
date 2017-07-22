@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: mysql:mysql-connector-java:5.1.8">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.8/mysql-connector-java-5.1.8.jar!/" />
+      <root url="jar://C:/gradle-3.2.1/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.8/ca016d1d4f48d7aa2b6ea75639d53b124ad189a8/mysql-connector-java-5.1.8.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -4,14 +4,23 @@ import com.orange.bean.user.Buyer;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+
 
 public interface BuyerDao {
+
+    @Update("update tb_user set password=#{password} where username=#{username}")
+    static void updateUserPassword(@Param("username") String username, @Param("password") String password) {
+        // TODO Auto-generated method stub
+    }
 
 	/**
 	 * 添加
 	 * @param buyer
 	 */
 	Integer addBuyer(Buyer buyer);
+
 	/**
 	 * 根据主键批量查找
 	 * @param
@@ -28,7 +37,7 @@ public interface BuyerDao {
 	 * 根据主键批量删除
 	 * @param
 	 */
-	Integer deleteByKeys(List<String> idList);
+    void deleteByKeys(List<String> idList);
 
 	/**
 	 * 根据主键更新
@@ -53,4 +62,5 @@ public interface BuyerDao {
 	 * @param buyerQuery
 	 */
 	public int getBuyerListCount(Buyer buyerQuery);
+
 }

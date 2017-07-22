@@ -1,9 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: net.fckeditor:java-core:2.6">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/net/fckeditor/java-core/2.6/java-core-2.6.jar!/" />
+      <root url="jar://C:/gradle-3.2.1/caches/modules-2/files-2.1/net.fckeditor/java-core/2.6/536db1b2bdc7b93a5ad066c82b48219d3796d808/java-core-2.6.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://C:/gradle-3.2.1/caches/modules-2/files-2.1/net.fckeditor/java-core/2.6/a4841667f17d2fff7eaf78066cd6cb6644e0441d/java-core-2.6-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

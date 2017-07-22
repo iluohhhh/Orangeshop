@@ -22,6 +22,7 @@ public class FileUtil {
      * @return
      */
     public static final String fileUp(MultipartFile file, String path) {
+        //获取扩展名
         String originalName = file.getOriginalFilename();
         String ext = originalName.substring(originalName.lastIndexOf("."));
         StringBuilder sb = new StringBuilder();
@@ -42,6 +43,7 @@ public class FileUtil {
         return null;
     }
 
+    //图片生成策略
     public static final String createNewFileName() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS");
         String name = df.format(new Date());

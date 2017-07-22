@@ -42,7 +42,8 @@ public class OrderServiceImpl implements OrderService {
      *
      * @return
      */
-    public Order addOrder(Order order,BuyCart buyCart) {
+    @Transactional
+    public Order addOrder(Order order, BuyCart buyCart) {
         //生成订单号
         DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         String oid = df.format(new Date());
@@ -116,6 +117,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public void updateOrderByKey(Order order) {
         orderDao.updateOrderByKey(order);
     }

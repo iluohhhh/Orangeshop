@@ -1,9 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: org.devlib.schmidt:imageinfo:1.9">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/devlib/schmidt/imageinfo/1.9/imageinfo-1.9.jar!/" />
+      <root url="jar://C:/gradle-3.2.1/caches/modules-2/files-2.1/org.devlib.schmidt/imageinfo/1.9/e9ff2b7c4bc9f3b14a20bed7d08c89f9a4797fd0/imageinfo-1.9.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://C:/gradle-3.2.1/caches/modules-2/files-2.1/org.devlib.schmidt/imageinfo/1.9/9eebd36e592a81c68e59bf07f209e65d252fcf1/imageinfo-1.9-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

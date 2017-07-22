@@ -55,7 +55,8 @@
 		<div class="col-md-12">
 			<form action="">
 				<div class="col-md-4">
-					用于获取订单
+                    <h3>订单打分：</h3>
+                    <input type="text" value="请对我们的物流、质量、服务进行打分哦~"/>
 				</div>
 				<div class="col-md-8">
 				<h3>

@@ -53,11 +53,11 @@ public class UploadController {
     @RequestMapping(value = "/uploadFck.do")
     public void uploadFck(HttpServletRequest request,HttpServletResponse response){
         String path = null;
-        //强转request  支持多个
+        //强制转换request  支持多个
         MultipartHttpServletRequest mr= (MultipartHttpServletRequest)request;
-        //获取值  支持多个
+        //获取文件集合  支持多个
         Map<String, MultipartFile> fileMap = mr.getFileMap();
-        //遍历Map
+        //遍历Map集合
         Set<Map.Entry<String, MultipartFile>> entrySet = fileMap.entrySet();
         for(Map.Entry<String, MultipartFile> entry : entrySet){
             MultipartFile file = entry.getValue();

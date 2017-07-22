@@ -40,4 +40,10 @@ public class BuyerServiceImpl implements BuyerService {
             buyerDao.addBuyer(buyer);
         }
     }
+
+    public void updateUserPassword(String username, String password) {
+        BuyerDao.updateUserPassword(username, password);// TODO Auto-generated method stub
+
+    }
+
 }

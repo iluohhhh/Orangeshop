@@ -5,6 +5,13 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 //apply plugin: 'jetty'
+apply from: 'gretty.plugin'
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
 
 sourceCompatibility = 1.8
 
@@ -36,14 +43,19 @@ dependencies {
     compile group:'org.codehaus.jackson', name:'jackson-mapper-asl',version: '1.9.11'
     compile group:'com.alibaba',name: 'fastjson',version: '1.2.24'
     compile group: 'javax.servlet',name: 'servlet-api',version: '2.2'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api 
+
+compile group: 'com.sun.mail', name: 'javax.mail', version: '1.4.7'
 }
-
-
+tasks.withType(JavaCompile) {  
+    options.encoding = "UTF-8"  
+}
 gretty {
-    port = 8088
+    port = 8090  
     contextPath ="/${project.name}"
     servletContainer = 'tomcat8'
     debugPort = 5005      // default
- 	debugSuspend = true   // default
- 	httpsEnabled = true
+  	debugSuspend = true   // default
+  	httpsEnabled = true
 }

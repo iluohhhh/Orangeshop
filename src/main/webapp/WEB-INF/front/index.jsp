@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"  %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ page import="com.orange.mycount.SessionCounter" %> --%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ page import="com.orange.mycount.SessionCounter" %> 
 <html lang="en">
 <head>
     <c:set var="base" value="${pageContext.request.contextPath}"></c:set>
@@ -36,9 +32,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="row">
             <div class="col-md-4">
                 <div class="btn-group">
-
+                    <img alt="logo" src="${base}/images/048.jpg"><br/>
                 </div>
-                <img alt="logo" src="${base}/images/048.jpg"><br/>
 
                 <table class="table">
                     <tbody>
@@ -56,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class="col-md-8">
                         <h5>
-                          	  欢迎来到盛唐文化！ 在线人数为：<%-- <%=SessionCounter.getActiveSessions() %> --%>
+                            欢迎来到盛唐文化！ 当前在线人数为:${activeSessions}
                         </h5>
                     </div>
                     <div class="col-md-2">
@@ -71,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <a href="${base}/order/myOrder.shtml">我的订单</a>
                                 </li>
                                 <li>
-                                    <a href="#">我的余额</a>
+                                    <a href="${base}/login/tochange.shtml">修改密码</a>
                                 </li>
                                 <li>
                                     <a href="${base}/shopping/cart.shtml">我的购物车</a>

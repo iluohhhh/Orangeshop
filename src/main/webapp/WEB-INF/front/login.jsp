@@ -106,7 +106,8 @@
 								&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp
 								&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp <label>
 									<input type="checkbox" id="rmbUser"> 记住密码
-								</label>&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp <a href="#" class="am-fr"><b>忘记密码</b></a>
+                            </label>&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp <a href="${base}/login/forgotpwd.shtml"
+                                                                          class="am-fr"><b>忘记密码</b></a>
 							</div>
 						</div>
 					</div>
